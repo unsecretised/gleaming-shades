@@ -1,0 +1,190 @@
+/* Root container for all cards (infocard-parent, listcard-parent, imagecard-parent)
+   You’re already generating class names like "<kind>-parent" in Gleam. */
+
+.infocard-parent,
+.listcard-parent,
+.imagecard-parent {
+  box-sizing: border-box;
+  width: 280px;
+  max-width: 100%;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: #0f172a; /* slate-900 */
+  color: #e5e7eb; /* gray-200 */
+  font-family:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition:
+    transform 0.16s ease-out,
+    box-shadow 0.16s ease-out,
+    border-color 0.16s ease-out,
+    background-color 0.16s ease-out;
+}
+
+.infocard-parent:hover,
+.listcard-parent:hover,
+.imagecard-parent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.7);
+  border-color: rgba(148, 163, 184, 0.7);
+}
+
+/* -------------------- Shared heading styles -------------------- */
+
+.infocard-h3,
+.listcard-h3,
+.imagecard-h3 {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #38bdf8; /* sky-400 accent */
+}
+
+/* -------------------- InfoCard -------------------- */
+
+.infocard-info {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #cbd5f5; /* soft light text */
+}
+
+/* Optional: style the button you pass in as an addon if it uses a class */
+.infocard-parent .button,
+.infocard-parent button {
+  margin-top: 10px;
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.6);
+  background: rgba(15, 23, 42, 0.85);
+  color: #e0f2fe;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.14s ease,
+    border-color 0.14s ease,
+    color 0.14s ease,
+    transform 0.1s ease;
+}
+
+.infocard-parent .button:hover,
+.infocard-parent button:hover {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: #38bdf8;
+  color: #f9fafb;
+  transform: translateY(-1px);
+}
+
+/* -------------------- ListCard -------------------- */
+
+.listcard-h4 {
+  margin: 2px 0 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.listcard-list-title {
+  display: block;
+}
+
+/* The <ol>/<ul> itself */
+.listcard-list {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style-position: inside;
+  font-size: 0.9rem;
+  color: #cbd5f5;
+}
+
+/* Items (you give them class "" but we style <li> under .listcard-list) */
+.listcard-list > li {
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.listcard-list > li:last-child {
+  border-bottom: none;
+}
+
+/* For ordered vs unordered subtle differentiation */
+ol.listcard-list {
+  list-style-type: decimal;
+}
+
+ul.listcard-list {
+  list-style-type: disc;
+}
+
+/* -------------------- ImageCard -------------------- */
+
+.imagecard-parent {
+  padding: 0;
+  overflow: hidden; /* clean rounded corners around image */
+}
+
+/* Image at top of card */
+.imagecard-img {
+  width: 100%;
+  max-height: 180px;
+  display: block;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+  object-fit: scale-down;
+}
+
+/* Container for header + info text under the image */
+.imagecard-textdiv {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Override for imagecard heading to be a bit bigger if you like */
+.imagecard-h3 {
+  font-size: 0.9rem;
+}
+
+/* Info text under image */
+.imagecard-info {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #cbd5f5;
+}
+
+/* -------------------- Utility: responsive layout if you use multiple cards -------------------- */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+@media (prefers-color-scheme: light) {
+  .infocard-parent,
+  .listcard-parent,
+  .imagecard-parent {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+  }
+  .infocard-h3,
+  .listcard-h3,
+  .imagecard-h3 {
+    color: #2563eb; /* blue-600 accent in light mode */
+  }
+  .listcard-list,
+  .infocard-info,
+  .imagecard-info {
+    color: #4b5563;
+  }
+}
